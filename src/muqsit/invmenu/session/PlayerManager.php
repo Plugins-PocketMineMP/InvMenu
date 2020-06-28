@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu\session;
+namespace InvMenu\muqsit\invmenu\session;
 
 use pocketmine\Player;
 
@@ -39,9 +39,5 @@ final class PlayerManager{
 
 	public static function get(Player $player) : ?PlayerSession{
 		return self::$sessions[$player->getRawUniqueId()] ?? null;
-	}
-
-	public static function getNonNullable(Player $player) : PlayerSession{
-		return self::$sessions[$player->getRawUniqueId()];
 	}
 }

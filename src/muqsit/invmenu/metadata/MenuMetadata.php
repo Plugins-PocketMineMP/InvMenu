@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu\metadata;
+namespace InvMenu\muqsit\invmenu\metadata;
 
-use muqsit\invmenu\inventory\InvMenuInventory;
-use muqsit\invmenu\session\MenuExtradata;
+use InvMenu\muqsit\invmenu\inventory\InvMenuInventory;
+use InvMenu\muqsit\invmenu\session\MenuExtradata;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
 

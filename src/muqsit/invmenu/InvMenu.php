@@ -19,13 +19,13 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu;
+namespace InvMenu\muqsit\invmenu;
 
 use Closure;
-use InvalidStateException;
-use muqsit\invmenu\inventory\InvMenuInventory;
-use muqsit\invmenu\metadata\MenuMetadata;
-use muqsit\invmenu\session\PlayerManager;
+use InvMenu\muqsit\invmenu\inventory\InvMenuInventory;
+use InvMenu\muqsit\invmenu\metadata\MenuMetadata;
+use InvMenu\muqsit\invmenu\session\PlayerManager;
+use InvMenu\muqsit\invmenu\session\PlayerSession;
 use pocketmine\inventory\transaction\action\SlotChangeAction;
 use pocketmine\item\Item;
 use pocketmine\Player;
@@ -36,13 +36,7 @@ abstract class InvMenu implements MenuIds{
 		return new SharedInvMenu(InvMenuHandler::getMenuType($identifier));
 	}
 
-	/**
-	 * @deprecated Use multiple InvMenu::create() instead.
-	 * @param string $identifier
-	 * @return SessionizedInvMenu
-	 */
 	public static function createSessionized(string $identifier) : SessionizedInvMenu{
-		trigger_error("Use multiple InvMenu instances instead.", E_USER_DEPRECATED);
 		return new SessionizedInvMenu(InvMenuHandler::getMenuType($identifier));
 	}
 
@@ -83,25 +77,16 @@ abstract class InvMenu implements MenuIds{
 	}
 
 	public function readonly(bool $value = true) : self{
-		if(!InvMenuHandler::isRegistered()){
-			throw new InvalidStateException("Tried altering readonly state before registration");
-		}
 		$this->readonly = $value;
 		return $this;
 	}
 
 	public function setListener(?callable $listener) : self{
-		if(!InvMenuHandler::isRegistered()){
-			throw new InvalidStateException("Tried setting listener before registration");
-		}
 		$this->listener = $listener;
 		return $this;
 	}
 
 	public function setInventoryCloseListener(?callable $listener) : self{
-		if(!InvMenuHandler::isRegistered()){
-			throw new InvalidStateException("Tried setting inventory close listener before registration");
-		}
 		$this->inventory_close_listener = $listener;
 		return $this;
 	}
@@ -114,9 +99,10 @@ abstract class InvMenu implements MenuIds{
 	}
 
 	final public function send(Player $player, ?string $name = null, ?Closure $callback = null) : void{
+		/** @var PlayerSession $session */
 		$session = PlayerManager::get($player);
-		if($session === null){
-			if($callback !== null){
+		if($session == null){
+			if($callback != null){
 				$callback(false);
 			}
 		}else{
@@ -147,7 +133,7 @@ abstract class InvMenu implements MenuIds{
 			return false;
 		}
 
-		return $this->listener === null || ($this->listener)($player, $in, $out, $action);
+		return $this->listener == null || ($this->listener)($player, $in, $out, $action);
 	}
 
 	public function onClose(Player $player) : void{
@@ -155,6 +141,9 @@ abstract class InvMenu implements MenuIds{
 			($this->inventory_close_listener)($player, $this->getInventoryForPlayer($player));
 		}
 
-		PlayerManager::getNonNullable($player)->removeCurrentMenu();
+		/** @var PlayerSession $session */
+		$session = PlayerManager::get($player);
+		$this->type->removeGraphic($player, $session->getMenuExtradata());
+		$session->removeCurrentMenu();
 	}
 }

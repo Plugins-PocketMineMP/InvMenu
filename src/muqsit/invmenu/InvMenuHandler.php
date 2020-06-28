@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu;
+namespace InvMenu\muqsit\invmenu;
 
 use InvalidArgumentException;
-use muqsit\invmenu\metadata\DoubleBlockMenuMetadata;
-use muqsit\invmenu\metadata\MenuMetadata;
-use muqsit\invmenu\metadata\SingleBlockMenuMetadata;
+use InvMenu\muqsit\invmenu\metadata\DoubleBlockMenuMetadata;
+use InvMenu\muqsit\invmenu\metadata\MenuMetadata;
+use InvMenu\muqsit\invmenu\metadata\SingleBlockMenuMetadata;
 use pocketmine\block\BlockFactory;
 use pocketmine\block\BlockIds;
 use pocketmine\network\mcpe\protocol\types\WindowTypes;

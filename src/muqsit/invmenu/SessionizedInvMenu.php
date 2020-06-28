@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu;
+namespace InvMenu\muqsit\invmenu;
 
-use muqsit\invmenu\inventory\InvMenuInventory;
+use InvMenu\muqsit\invmenu\inventory\InvMenuInventory;
 use pocketmine\Player;
 
 class SessionizedInvMenu extends InvMenu{

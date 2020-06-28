@@ -19,14 +19,14 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu\session;
+namespace InvMenu\muqsit\invmenu\session;
 
 use Closure;
 use InvalidArgumentException;
 use InvalidStateException;
-use muqsit\invmenu\inventory\InvMenuInventory;
-use muqsit\invmenu\InvMenu;
-use muqsit\invmenu\InvMenuHandler;
+use InvMenu\muqsit\invmenu\inventory\InvMenuInventory;
+use InvMenu\muqsit\invmenu\InvMenu;
+use InvMenu\muqsit\invmenu\InvMenuHandler;
 use pocketmine\network\mcpe\protocol\types\ContainerIds;
 use pocketmine\Player;
 
@@ -102,14 +102,14 @@ class PlayerSession{
 	public function setCurrentMenu(?InvMenu $menu, ?Closure $callback = null) : bool{
 		if($menu !== null){
 			$this->network->wait(function(bool $success) use($callback) : void{
-				if($this->current_menu !== null){
-					if($success && $this->sendWindow()){
+				if($success && $this->current_menu !== null){
+					if($this->sendWindow()){
 						if($callback !== null){
 							$callback(true);
 						}
 						return;
 					}
-					$this->removeCurrentMenu();
+					$this->setCurrentMenu(null);
 				}
 				if($callback !== null){
 					$callback(false);
@@ -134,11 +134,6 @@ class PlayerSession{
 	 * @return bool
 	 */
 	public function removeCurrentMenu() : bool{
-		if($this->current_menu !== null){
-			$this->current_menu->getType()->removeGraphic($this->player, $this->menu_extradata);
-			$this->menu_extradata->reset();
-			return $this->setCurrentMenu(null);
-		}
-		return false;
+		return $this->setCurrentMenu(null);
 	}
 }

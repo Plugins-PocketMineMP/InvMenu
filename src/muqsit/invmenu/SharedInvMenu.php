@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu;
+namespace InvMenu\muqsit\invmenu;
 
-use muqsit\invmenu\inventory\InvMenuInventory;
-use muqsit\invmenu\metadata\MenuMetadata;
+use InvMenu\muqsit\invmenu\inventory\InvMenuInventory;
+use InvMenu\muqsit\invmenu\metadata\MenuMetadata;
 use pocketmine\Player;
 
 class SharedInvMenu extends InvMenu{

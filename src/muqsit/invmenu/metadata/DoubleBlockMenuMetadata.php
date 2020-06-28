@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu\metadata;
+namespace InvMenu\muqsit\invmenu\metadata;
 
-use muqsit\invmenu\session\MenuExtradata;
+use InvMenu\muqsit\invmenu\session\MenuExtradata;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\Player;

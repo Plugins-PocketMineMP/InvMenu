@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu\session;
+namespace InvMenu\muqsit\invmenu\session;
 
 use Closure;
 use pocketmine\network\mcpe\protocol\NetworkStackLatencyPacket;

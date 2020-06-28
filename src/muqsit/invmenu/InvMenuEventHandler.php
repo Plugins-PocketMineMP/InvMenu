@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace muqsit\invmenu;
+namespace InvMenu\muqsit\invmenu;
 
-use muqsit\invmenu\session\PlayerManager;
+use InvMenu\muqsit\invmenu\session\PlayerManager;
 use pocketmine\event\inventory\InventoryTransactionEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;

@@ -17,11 +17,30 @@
  *
 */
 
-namespace InvMenu\muqsit\invmenu;
+namespace InvMenu\muqsit\invmenu\inventories;
 
-interface MenuIds{
+use pocketmine\block\Block;
+use pocketmine\network\mcpe\protocol\types\WindowTypes;
 
-	public const TYPE_CHEST = "invmenu:chest";
-	public const TYPE_DOUBLE_CHEST = "invmenu:double_chest";
-	public const TYPE_HOPPER = "invmenu:hopper";
+class HopperInventory extends SingleBlockInventory{
+
+	public function getBlock() : Block{
+		return Block::get(Block::HOPPER_BLOCK);
+	}
+
+	public function getNetworkType() : int{
+		return WindowTypes::HOPPER;
+	}
+
+	public function getTileId() : string{
+		return "Hopper";
+	}
+
+	public function getName() : string{
+		return "Hopper";
+	}
+
+	public function getDefaultSize() : int{
+		return 5;
+	}
 }
